@@ -7,6 +7,8 @@ import pages.MainPage;
 import pages.PricePage;
 import pages.SendPage;
 
+import java.util.concurrent.TimeUnit;
+
 public class ApplicationManager {
     public WebDriver driver;
     public MainPage mainPage;
@@ -31,10 +33,13 @@ public class ApplicationManager {
     public void init() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chromedriver\\chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://127.0.0.1:5500/");
         mainPage = new MainPage(driver);
         sendPage = new SendPage(driver);
-        Thread.sleep(1000);
+        historyPage = new HistoryPage(driver);
+        pricePage = new PricePage(driver);
+
     }
 
     public void close() {

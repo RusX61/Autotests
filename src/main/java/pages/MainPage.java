@@ -13,9 +13,7 @@ public class MainPage extends Element {
     }
 
     private By dataSend = By.xpath("//*[@id=\"send_button\"]");
-
     private By dataHistory = By.xpath("//*[@id=\"history_button\"]");
-
     private By catalog = By.xpath("//*[@id=\"catalog_button\"]");
 
 
