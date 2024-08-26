@@ -12,23 +12,27 @@ public class MainPage extends Element {
         this.driver = driver;
     }
 
-    private By dataSend = By.xpath("//*[@id=\"send_button\"]");
-    private By dataHistory = By.xpath("//*[@id=\"history_button\"]");
-    private By catalog = By.xpath("//*[@id=\"catalog_button\"]");
 
+    private By dataSend = By.xpath("//*[@id=\"send_button\"]");
 
     public SendPage clickSend() {
         click(driver.findElement(dataSend));
         return new SendPage(driver);
     }
 
+
+    private By dataHistory = By.xpath("//*[@id=\"history_button\"]");
+
     public HistoryPage clickHistory() {
         driver.findElement(dataHistory).click();
         return new HistoryPage(driver);
     }
 
+
+    private By price = By.xpath("//*[@id=\"catalog_button\"]");
+
     public PricePage clickPrice() {
-        driver.findElement(catalog).click();
+        driver.findElement(price).click();
         return new PricePage(driver);
     }
 
