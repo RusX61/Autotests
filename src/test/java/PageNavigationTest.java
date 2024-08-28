@@ -16,7 +16,7 @@ import static pages.BasePage.driver;
 import static pages.SendPage.*;
 import static utils.DataProvider.sendPageTestData;
 
-public class PageNavigationTest extends TestBase {
+class AllureTst extends TestBase {
 
     Logger logger = LoggerFactory.getLogger(TestBase.class);
 

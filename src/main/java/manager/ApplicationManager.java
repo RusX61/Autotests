@@ -1,13 +1,18 @@
 package manager;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pages.HistoryPage;
 import pages.MainPage;
 import pages.PricePage;
 import pages.SendPage;
 
-import java.util.concurrent.TimeUnit;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.Properties;
+
+import static manager.DriverFactory.CHROME;
 
 public class ApplicationManager {
     public WebDriver driver;
@@ -30,16 +35,16 @@ public class ApplicationManager {
 
 
 
-    public void init() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chromedriver\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://127.0.0.1:5500/");
+    public void init() throws IOException {
+        Properties properties = new Properties();
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/main/resources/%s.properties", target))));
+        driver = DriverFactory.createDriver(System.getProperty("browser", CHROME));
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get(properties.getProperty("web.baseUrl"));
         mainPage = new MainPage(driver);
         sendPage = new SendPage(driver);
-        historyPage = new HistoryPage(driver);
-        pricePage = new PricePage(driver);
-
     }
 
     public void close() {
